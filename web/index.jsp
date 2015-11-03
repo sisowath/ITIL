@@ -1,3 +1,10 @@
+<%
+    if( request.getSession().getAttribute("username") == null ) {
+%>
+        <jsp:forward page="login.jsp"/>
+<%
+    }
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

@@ -19,12 +19,8 @@ public class UserDao extends Dao<User> {
 
     @Override
     public boolean create(User x) {
-        String req =    "INSERT INTO user (`username`, `password`) " + 
-                        "VALUES ('" + x.getUsername() + "','" +  x.getPassword() + "')";
-        /*
-            Le id est auto_increment. Donc, pas besoin de mettre comme paramètre.
-            Il y a un statut par défaut à tous les nouveaux abonnés : player
-        */
+        String req =    "INSERT INTO user (`username`, `password`, `role`) " + 
+                        "VALUES ('" + x.getUsername() + "','" +  x.getPassword() + "', '" + x.getRole() + "')";
         Statement stm = null;
         try {
             stm = cnx.createStatement();
@@ -74,24 +70,16 @@ public class UserDao extends Dao<User> {
     @Override 
     public User read(String username) {        
         PreparedStatement stm = null;
-        //Statement stm = null;
         try {            
-            //stm = cnx.createStatement();
-            //ResultSet r = stm.executeQuery("SELECT * FROM user WHERE username = '" + username + "'");
-            //Avec requête paramétrée :
             stm = cnx.prepareStatement("SELECT * FROM user WHERE username = ?");
             stm.setString(1,username);
             ResultSet r = stm.executeQuery();
             if (r.next()) {
                 User c = new User();
-                c.setId(r.getInt("id"));
-                c.setUsername(r.getString("username"));
-                c.setPassword(r.getString("password"));
-                c.setStatut(r.getString("statut"));
-                c.setEmail(r.getString("email"));
-                c.setDescription(r.getString("description"));
-                c.setFerraille(r.getInt("ferraille"));
-                c.setPrestige(r.getInt("prestige"));
+                c.setId( r.getInt("id") );
+                c.setUsername( r.getString("username") );
+                c.setPassword( r.getString("password") );      
+                c.setRole( r.getString("role") );
                 r.close();
                 stm.close();
                 return c;
@@ -108,67 +96,14 @@ public class UserDao extends Dao<User> {
             }
         }
         return null;
-    }
-    public int readIdByUsername(String username) {        
-        PreparedStatement stm = null;
-        try {            
-            stm = cnx.prepareStatement("SELECT id FROM user WHERE username = ?");
-            stm.setString(1,username);
-            ResultSet r = stm.executeQuery();
-            if (r.next()) {                
-                r.close();
-                stm.close();
-                return r.getInt("id");
-            }
-        } catch (SQLException exp) {
-			
-        } finally {
-            if (stm != null) {
-                try {
-                    stm.close();
-                } catch (SQLException e) {            
-                    e.printStackTrace();
-                }
-            }
-        }
-        return 0;
-    }
-    public List<User> readBestPlayers() {//source de : http://www.developerfusion.com/code/1751/limit-the-number-of-rows-returned/
-        Statement stm = null;
-        List<User> listeDesMeilleursJoueurs = new ArrayList<User>();
-        try {            
-            stm = cnx.createStatement();
-            ResultSet r = stm.executeQuery("SELECT * FROM `user` ORDER BY `prestige` DESC LIMIT 10");
-            while (r.next()) {
-                User c = new User(r.getInt("id"), r.getString("username"), 
-                                r.getString("password"), r.getString("statut"), 
-                                r.getString("email"), r.getString("description"),
-                                r.getInt("ferraille"), r.getInt("prestige"));
-                listeDesMeilleursJoueurs.add(c);
-            }
-            r.close();
-            stm.close();
-            return listeDesMeilleursJoueurs;
-        } catch (SQLException exp) {
-			
-        } finally {
-            if (stm != null) {
-                try {
-                    stm.close();
-                } catch (SQLException e) {            
-                    e.printStackTrace();
-                }
-            }
-        }
-        return null;      
-    }
+    }   
 // U P D A T E    
     @Override
     public boolean update(User x) {
         Statement stm = null;
         try {
             String req =    "UPDATE user SET username = '" + x.getUsername() + 
-                            "', password = '" + x.getPassword() + "', statut = '" + x.getStatut() +
+                            "', password = '" + x.getPassword() + "', role = '" + x.getRole() +
                             " WHERE id = " + x.getId() + "";
             stm = cnx.createStatement();
             int n = stm.executeUpdate(req);
@@ -197,10 +132,7 @@ public class UserDao extends Dao<User> {
             Statement stm = cnx.createStatement();
             ResultSet r = stm.executeQuery("SELECT * FROM user");
             while (r.next()) {
-                User c = new User(r.getInt("id"), r.getString("username"), 
-                                r.getString("password"), r.getString("statut"), 
-                                r.getString("email"), r.getString("description"),
-                                r.getInt("ferraille"), r.getInt("prestige"));
+                User c = new User(r.getInt("id"), r.getString("username"), r.getString("password"), r.getString("role"));
                 liste.add(c);
             }
             r.close();
