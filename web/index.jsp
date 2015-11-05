@@ -18,16 +18,27 @@
         <jsp:forward page="login.jsp"/>
 <%
     }
-%>        
+%>      
         <h1>Bonjour <%= request.getSession().getAttribute("user.username") %>, Bienvenue à la page d'accueil</h1>
         <a href="./controller?action=logout">Se déconnecter</a>     
+<%        
+    if( request.getSession().getAttribute("user.role").equals("admin") ) {
+%>
+        <jsp:include page="fileUploadForm.jsp"/>
+<%
+    }
+%>          
         <jsp:include page="searchBar.jsp"/><hr />
 <%
     if( request.getAttribute("error-message") != null ) {
         out.println("<h3>" + request.getAttribute("error-message") +"</h3>");
     }
     if( request.getAttribute("success-message") != null ) {
-        out.println("<h3>" + request.getAttribute("success-message") +"</h3>");
+%>
+        <div id="success-message">
+            <h3><%= request.getAttribute("success-message") %></h3>
+        </div>
+<%
     }
     if( request.getSession().getAttribute("user.role").equals("admin") ) {
 %>

@@ -5,7 +5,11 @@ h1 {
 td {
     width: 200px;
 }
-
+#success-message {
+    color: aqua;
+    text-align: center;
+    font-size: 24px;
+}
 form {
     width: 600px;
     margin: 0 auto;

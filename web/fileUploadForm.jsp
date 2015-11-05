@@ -6,12 +6,15 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form method="post" action="./controller" enctype="multipart/form-data">
-            Nom :<input type="text" name="nom" id="nom" /><br/>
-            Photo :<input type="file" name="photo" id="photo" /><br/>
-            <input type="hidden" name="action" value="televersement"/>
-            <input type="submit" value="Go" name="go" id="go" />
-        </form>
+        <form method="POST" action="./controller?action=televersement" enctype="multipart/form-data" >
+            <table border="1px solid black">
+                <tr>
+                    <td>File : </td>
+                    <td><input type="file" name="file" id="file" /></td>
+                    <td><input type="submit" value="Upload" name="upload" id="upload" /></td>
+                </tr>
+            </table>
+        </form> 
         <!--
         <table border="1px soldi black">
             <tr>

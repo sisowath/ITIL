@@ -21,13 +21,12 @@ public class UploadServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         final PrintWriter writer = response.getWriter();
-        String path = request.getParameter("destination");
         final Part filePart = request.getPart("file");
         final String fileName = getFileName(filePart);        
         OutputStream out = null;
         InputStream filecontent = null;
         try {
-            path = this.getServletContext().getRealPath("")+"/data";
+            String path = this.getServletContext().getRealPath("").replaceAll("build", "") + "\\document";
             out = new FileOutputStream(new File(path + File.separator + fileName));          
             filecontent = filePart.getInputStream();
             int read = 0;
@@ -36,8 +35,12 @@ public class UploadServlet extends HttpServlet {
                 out.write(bytes, 0, read);
             }
             writer.println("Nouveau fichier " + fileName + " dans " + path);
+            request.setAttribute("success-message", "Téléversement réussi !!");
+            request.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
         } catch (FileNotFoundException fne) {
             writer.println("<br/> ERREUR: " + fne.getMessage());
+            request.setAttribute("success-message", "Téléversement réussi !!");
+            request.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
         } finally {
             if (out != null) { out.close(); }
             if (filecontent != null) { filecontent.close(); }
