@@ -37,6 +37,9 @@ public class ControleurFrontal extends HttpServlet {
                 else if("search".equals( action )) {
                     request.getServletContext().getRequestDispatcher("/google").forward(request, response);
                     return;
+                } else {
+                    request.setAttribute("error-message", "ERREUR ! Je ne peux pas traiter votre requête...");
+                    request.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
                 }
             }
         }

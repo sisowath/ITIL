@@ -202,4 +202,23 @@ public class DocumentDao extends Dao<Document> {
         }
         return null;
     }
+    public List<Document> findAllByKeyword(String keyword) {
+        PreparedStatement stm = null;                     
+        List<Document> liste = new LinkedList<Document>();
+        try {
+            stm = cnx.prepareStatement("SELECT * FROM document WHERE keyword LIKE ? ");
+            stm.setString(1,"%" + keyword.toLowerCase() + "%");         
+            ResultSet r = stm.executeQuery();
+            while (r.next()) {
+                Document c = new Document(r.getInt("id"), r.getString("titre"), r.getString("auteur"), r.getString("dateDeCreation"), r.getString("path"), r.getString("format"), r.getString("keyword"));
+                liste.add(c);
+            }            
+            r.close();
+            stm.close();
+            return liste;
+        } catch (SQLException exp) {
+            
+        }
+        return null;
+    }
 }

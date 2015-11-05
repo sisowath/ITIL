@@ -4,11 +4,15 @@
 <%@page import="com.itil.jdbc.Connexion"%>
 <div>
 <%
-        Class.forName( request.getServletContext().getInitParameter("jdbcDriver") );
-        Connexion.setUrl( request.getServletContext().getInitParameter("databaseURL") );
-        DocumentDao unDocumentDao = new DocumentDao( Connexion.getInstance() );
-        List<Document> uneListeDesDocuments = unDocumentDao.findAllByRole( request.getSession().getAttribute("user.role").toString() );
-        
+        List<Document> uneListeDesDocuments = null;
+        if( request.getAttribute("wantedList") == null ) {
+            Class.forName( request.getServletContext().getInitParameter("jdbcDriver") );
+            Connexion.setUrl( request.getServletContext().getInitParameter("databaseURL") );
+            DocumentDao unDocumentDao = new DocumentDao( Connexion.getInstance() );
+            uneListeDesDocuments = unDocumentDao.findAllByRole( request.getSession().getAttribute("user.role").toString() );
+        } else {
+            uneListeDesDocuments = (List<Document>) request.getAttribute("wantedList");
+        }
         out.println("<table border=\"1px solid black\"");
         out.println("<tr><th colspan=\"7\">La liste des documents disponibles</th</td>");
         out.println("<tr>");
