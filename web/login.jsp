@@ -4,6 +4,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="stylesheet" type="text/css" href="./js/styleForLogin.css">
     </head>
     <body>
 <%
@@ -31,7 +32,7 @@
                 </tr>
                 <tr>
                     <td><input type="hidden" name="action" value="login" /></td>
-                    <td><input type="submit" formaction="./controller" formmethod="post" /></td>
+                    <td><input type="submit" formaction="./controller" formmethod="post" value="Me connecter" /></td>
                 </tr>
             </table>
         </form>

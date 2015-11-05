@@ -1,0 +1,12 @@
+h1 {
+    color: blue;
+    text-align: center;
+}
+td {
+    width: 200px;
+}
+
+form {
+    width: 600px;
+    margin: 0 auto;
+}

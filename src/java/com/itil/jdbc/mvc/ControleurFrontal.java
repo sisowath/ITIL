@@ -34,6 +34,10 @@ public class ControleurFrontal extends HttpServlet {
                     request.getServletContext().getRequestDispatcher("/UploadServlet").forward(request, response);
                     return;
                 }
+                else if("search".equals( action )) {
+                    request.getServletContext().getRequestDispatcher("/google").forward(request, response);
+                    return;
+                }
             }
         }
     }
