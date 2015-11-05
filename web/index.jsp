@@ -28,5 +28,6 @@
 <%
     }
 %>        
+        <jsp:include page="documentOutput.jsp"/>
     </body>
 </html>

@@ -1,88 +1,59 @@
 package com.itil.jdbc.mvc;
 
-// Import required java libraries
-import java.io.*;
-import java.util.*;
- 
-import javax.servlet.ServletConfig;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
- 
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.commons.io.output.*;
+import javax.servlet.http.Part;
 
-public class UploadServlet extends HttpServlet {// source de : http://www.tutorialspoint.com/servlets/servlets-file-uploading.htm 
-   
-   private boolean isMultipart;
-   private String filePath;
-   private int maxFileSize = 50 * 1024;
-   private int maxMemSize = 4 * 1024;
-   private File file ;
-   private String fileName;
-   private String fieldName;
+//@WebServlet(name = "UploadServlet", urlPatterns = {"/UploadServlet"})
+@MultipartConfig
+public class UploadServlet extends HttpServlet {
 
-    public void init( ){
-        // Get the file location where it would be stored.
-        filePath = getServletContext().getInitParameter("file-upload"); 
-    }
-    public void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, java.io.IOException {
-        // Check that we have a file upload request
-        isMultipart = ServletFileUpload.isMultipartContent(request);
-        response.setContentType("text/html");
-        java.io.PrintWriter out = response.getWriter( );
-        if( !isMultipart ){
-            request.setAttribute("error-message", "Aucun fichier n'a été téléversé...");
-            request.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
-            return;
-        }
-        DiskFileItemFactory factory = new DiskFileItemFactory();
-        // maximum size that will be stored in memory
-        factory.setSizeThreshold(maxMemSize);
-        // Location to save data that is larger than maxMemSize.
-        factory.setRepository(new File("c:\\temp"));
-        // Create a new file upload handler
-        ServletFileUpload upload = new ServletFileUpload(factory);
-        // maximum file size to be uploaded.
-        upload.setSizeMax( maxFileSize );
-
-        try{ 
-            // Parse the request to get file items.
-            List fileItems = upload.parseRequest(request);
-            // Process the uploaded file items
-            Iterator i = fileItems.iterator();
-            while ( i.hasNext () ) 
-            {
-               FileItem fi = (FileItem)i.next();
-               if ( !fi.isFormField () )	
-               {
-                  // Get the uploaded file parameters
-                  fieldName = fi.getFieldName();
-                  fileName = fi.getName();
-                  String contentType = fi.getContentType();
-                  boolean isInMemory = fi.isInMemory();
-                  long sizeInBytes = fi.getSize();
-                  // Write the file
-                  if( fileName.lastIndexOf("\\") >= 0 ){
-                     file = new File( filePath + fileName.substring( fileName.lastIndexOf("\\"))) ;
-                  }else{
-                     file = new File( filePath + fileName.substring(fileName.lastIndexOf("\\")+1)) ;
-                  }
-                  fi.write( file ) ;
-                  out.println("Uploaded Filename: " + fileName + "<br>");
-               }
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        final PrintWriter writer = response.getWriter();
+        String path = request.getParameter("destination");
+        final Part filePart = request.getPart("file");
+        final String fileName = getFileName(filePart);        
+        OutputStream out = null;
+        InputStream filecontent = null;
+        try {
+            path = this.getServletContext().getRealPath("")+"/data";
+            out = new FileOutputStream(new File(path + File.separator + fileName));          
+            filecontent = filePart.getInputStream();
+            int read = 0;
+            final byte[] bytes = new byte[1024];
+            while ((read = filecontent.read(bytes)) != -1) {
+                out.write(bytes, 0, read);
             }
-        }catch(Exception ex) {
-            System.out.println(ex);
+            writer.println("Nouveau fichier " + fileName + " dans " + path);
+        } catch (FileNotFoundException fne) {
+            writer.println("<br/> ERREUR: " + fne.getMessage());
+        } finally {
+            if (out != null) { out.close(); }
+            if (filecontent != null) { filecontent.close(); }
+            if (writer != null) { writer.close(); }
         }
-        request.setAttribute(("success-message"), "file = " + file + " :: filePath = " + filePath + " :: fileName = " + fileName + " :: fieldName = " + fieldName);
-        request.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
-   }
-   @Override
+    }
+    private String getFileName(final Part part) {
+        for (String content : part.getHeader("content-disposition").split(";")) {
+            if (content.trim().startsWith("filename")) {
+                String s = content.substring(content.indexOf('=') + 1).trim();
+                return s.substring(s.lastIndexOf(File.separator) + 1).replace("\"","");
+            }
+        }
+        return null;
+    }
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);
     }

@@ -46,7 +46,7 @@ public class LoginPage extends HttpServlet {
                     //if( request.getAttribute("username") != null) request.removeAttribute("username");
                     HttpSession objetSession = request.getSession(true);
                     objetSession.setAttribute("connected", true);
-                    objetSession.setAttribute("username", unUser.getUsername() );
+                    objetSession.setAttribute("user.username", unUser.getUsername() );
                     objetSession.setAttribute("user.role", unUser.getRole());
                     request.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
                     return;

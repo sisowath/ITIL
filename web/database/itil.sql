@@ -2,10 +2,10 @@
 -- version 4.2.7.1
 -- http://www.phpmyadmin.net
 --
--- Client :  localhost
--- Généré le :  Jeu 05 Novembre 2015 à 00:48
--- Version du serveur :  5.6.20-log
--- Version de PHP :  5.4.31
+-- Host: localhost
+-- Generation Time: Nov 05, 2015 at 03:08 PM
+-- Server version: 5.6.20-log
+-- PHP Version: 5.4.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,27 +17,36 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de données :  `itil`
+-- Database: `itil`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `document`
+-- Table structure for table `document`
 --
 
 CREATE TABLE IF NOT EXISTS `document` (
 `id` int(11) NOT NULL,
-  `titre` varchar(20) COLLATE latin1_bin NOT NULL,
+  `titre` varchar(100) COLLATE latin1_bin NOT NULL,
   `path` varchar(20) COLLATE latin1_bin NOT NULL,
   `format` varchar(10) COLLATE latin1_bin NOT NULL,
   `keyword` varchar(50) COLLATE latin1_bin NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_bin AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_bin AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `document`
+--
+
+INSERT INTO `document` (`id`, `titre`, `path`, `format`, `keyword`) VALUES
+(1, 'C# Programming', '/document', 'pdf', 'c#, programming'),
+(2, 'Java EE 7 Development', '/document', 'pdf', 'java, programming'),
+(3, 'Markdown', '/document', 'md', 'markdown, programming');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE IF NOT EXISTS `user` (
@@ -48,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_bin AUTO_INCREMENT=6 ;
 
 --
--- Contenu de la table `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id`, `username`, `password`, `role`) VALUES
@@ -59,32 +68,32 @@ INSERT INTO `user` (`id`, `username`, `password`, `role`) VALUES
 (5, 'daniel', 'gailloux', 'user');
 
 --
--- Index pour les tables exportées
+-- Indexes for dumped tables
 --
 
 --
--- Index pour la table `document`
+-- Indexes for table `document`
 --
 ALTER TABLE `document`
  ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
  ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT pour les tables exportées
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT pour la table `document`
+-- AUTO_INCREMENT for table `document`
 --
 ALTER TABLE `document`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
--- AUTO_INCREMENT pour la table `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;

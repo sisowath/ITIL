@@ -173,4 +173,27 @@ public class DocumentDao extends Dao<Document> {
         }
         return liste;
     }
+    public List<Document> findAllByRole(String role) {
+        PreparedStatement stm = null;                     
+        List<Document> liste = new LinkedList<Document>();
+        try {
+            if("admin".equals( role ) ) {
+                stm = cnx.prepareStatement("SELECT * FROM document");
+            } else if("user".equals( role ) ) {
+                stm = cnx.prepareStatement("SELECT * FROM document WHERE format = ?");
+                stm.setString(1,"pdf");
+            }                
+            ResultSet r = stm.executeQuery();
+            while (r.next()) {
+                Document c = new Document(r.getInt("id"), r.getString("titre"), r.getString("path"), r.getString("format"), r.getString("keyword"));
+                liste.add(c);
+            }            
+            r.close();
+            stm.close();
+            return liste;
+        } catch (SQLException exp) {
+            
+        }
+        return null;
+    }
 }
