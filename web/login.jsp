@@ -1,11 +1,11 @@
 <%
-    if( request.getSession().getAttribute("username") != null ) {
+    if( request.getSession().getAttribute("connected") != null ) {
 %>
         <jsp:forward page="index.jsp"/>
 <%
     }
 %>
-%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,7 +23,7 @@
             <table border="1px solid black">
                 <tr>
                     <td>Username :</td>
-                    <td><input type="text" name="username" /></td>
+                    <td><input type="text" name="username" value="${ requestScope['username'] }"/></td>
                 </tr>
                 <tr>
                     <td>Password :</td>
@@ -31,7 +31,7 @@
                 </tr>
                 <tr>
                     <td><input type="hidden" name="action" value="login" /></td>
-                    <td><input type="submit" formaction="./ControleurFrontal" formmethod="post" /></td>
+                    <td><input type="submit" formaction="./controller" formmethod="post" /></td>
                 </tr>
             </table>
         </form>

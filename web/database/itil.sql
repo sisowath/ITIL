@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Mar 03 Novembre 2015 à 18:52
+-- Généré le :  Jeu 05 Novembre 2015 à 00:48
 -- Version du serveur :  5.6.20-log
 -- Version de PHP :  5.4.31
 
@@ -19,6 +19,20 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `itil`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `document`
+--
+
+CREATE TABLE IF NOT EXISTS `document` (
+`id` int(11) NOT NULL,
+  `titre` varchar(20) COLLATE latin1_bin NOT NULL,
+  `path` varchar(20) COLLATE latin1_bin NOT NULL,
+  `format` varchar(10) COLLATE latin1_bin NOT NULL,
+  `keyword` varchar(50) COLLATE latin1_bin NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_bin AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -49,6 +63,12 @@ INSERT INTO `user` (`id`, `username`, `password`, `role`) VALUES
 --
 
 --
+-- Index pour la table `document`
+--
+ALTER TABLE `document`
+ ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `user`
 --
 ALTER TABLE `user`
@@ -58,6 +78,11 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour les tables exportées
 --
 
+--
+-- AUTO_INCREMENT pour la table `document`
+--
+ALTER TABLE `document`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `user`
 --

@@ -37,13 +37,17 @@ public class LoginPage extends HttpServlet {
                     request.setAttribute("error-message", "Erreur ! L'utilisateur " + username + " est inexistant.");
                     request.getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
                     return;
-                } else if( password.equals( unUser.getPassword() ) ) {
+                } else if( !password.equals( unUser.getPassword() ) ) {
                     request.setAttribute("error-message", "Erreur ! Le mot de passe est incorrect.");
+                    request.setAttribute("username", username);
                     request.getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
                     return;
                 } else {
+                    //if( request.getAttribute("username") != null) request.removeAttribute("username");
                     HttpSession objetSession = request.getSession(true);
+                    objetSession.setAttribute("connected", true);
                     objetSession.setAttribute("username", unUser.getUsername() );
+                    objetSession.setAttribute("user.role", unUser.getRole());
                     request.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
                     return;
                 }
