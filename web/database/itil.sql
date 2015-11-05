@@ -2,10 +2,10 @@
 -- version 4.2.7.1
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Nov 05, 2015 at 03:08 PM
--- Server version: 5.6.20-log
--- PHP Version: 5.4.31
+-- Client :  localhost
+-- Généré le :  Jeu 05 Novembre 2015 à 22:34
+-- Version du serveur :  5.6.20-log
+-- Version de PHP :  5.4.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,36 +17,38 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `itil`
+-- Base de données :  `itil`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `document`
+-- Structure de la table `document`
 --
 
 CREATE TABLE IF NOT EXISTS `document` (
 `id` int(11) NOT NULL,
   `titre` varchar(100) COLLATE latin1_bin NOT NULL,
+  `auteur` varchar(100) COLLATE latin1_bin NOT NULL DEFAULT 'CollegeDeRosemont',
+  `dateDeCreation` date NOT NULL,
   `path` varchar(20) COLLATE latin1_bin NOT NULL,
   `format` varchar(10) COLLATE latin1_bin NOT NULL,
   `keyword` varchar(50) COLLATE latin1_bin NOT NULL
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_bin AUTO_INCREMENT=5 ;
 
 --
--- Dumping data for table `document`
+-- Contenu de la table `document`
 --
 
-INSERT INTO `document` (`id`, `titre`, `path`, `format`, `keyword`) VALUES
-(1, 'C# Programming', '/document', 'pdf', 'c#, programming'),
-(2, 'Java EE 7 Development', '/document', 'pdf', 'java, programming'),
-(3, 'Markdown', '/document', 'md', 'markdown, programming');
+INSERT INTO `document` (`id`, `titre`, `auteur`, `dateDeCreation`, `path`, `format`, `keyword`) VALUES
+(1, 'C Sharp Programming', 'CollegeDeRosemont', '2013-04-30', './document/', '.pdf', 'c#, programming'),
+(2, 'Java EE 7 Development', 'CollegeDeRosemont', '2015-01-01', './document/', '.pdf', 'java, programming'),
+(3, 'Markdown', 'CollegeDeRosemont', '2015-11-05', './document/', '.md', 'markdown, programming');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Structure de la table `user`
 --
 
 CREATE TABLE IF NOT EXISTS `user` (
@@ -54,10 +56,10 @@ CREATE TABLE IF NOT EXISTS `user` (
   `username` varchar(20) COLLATE latin1_bin NOT NULL,
   `password` varchar(20) COLLATE latin1_bin NOT NULL,
   `role` varchar(20) COLLATE latin1_bin NOT NULL
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_bin AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_bin AUTO_INCREMENT=7 ;
 
 --
--- Dumping data for table `user`
+-- Contenu de la table `user`
 --
 
 INSERT INTO `user` (`id`, `username`, `password`, `role`) VALUES
@@ -65,38 +67,39 @@ INSERT INTO `user` (`id`, `username`, `password`, `role`) VALUES
 (2, 'kismony', 'ladouceur', 'admin'),
 (3, 'nicolas', 'blier', 'admin'),
 (4, 'jerome', 'beaulieu', 'admin'),
-(5, 'daniel', 'gailloux', 'user');
+(5, 'daniel', 'gailloux', 'user'),
+(6, 'usager', 'crosemont', 'user');
 
 --
--- Indexes for dumped tables
+-- Index pour les tables exportées
 --
 
 --
--- Indexes for table `document`
+-- Index pour la table `document`
 --
 ALTER TABLE `document`
  ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `user`
+-- Index pour la table `user`
 --
 ALTER TABLE `user`
  ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT pour les tables exportées
 --
 
 --
--- AUTO_INCREMENT for table `document`
+-- AUTO_INCREMENT pour la table `document`
 --
 ALTER TABLE `document`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
