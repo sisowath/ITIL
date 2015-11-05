@@ -1,10 +1,3 @@
-<%
-    if( request.getSession().getAttribute("username") == null ) {
-%>
-        <jsp:forward page="login.jsp"/>
-<%
-    }
-%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,6 +6,13 @@
         <title>JSP Page</title>
     </head>
     <body>
+<%
+    if( request.getSession().getAttribute("connected") == null ) {
+%>
+        <jsp:forward page="login.jsp"/>
+<%
+    }
+%>        
         <h1>Bienvenue à la page d'accueil</h1>
         <a href="./controller?action=logout">Se déconnecter</a>        
 <%
@@ -24,7 +24,7 @@
     }
     if( request.getSession().getAttribute("user.role").equals("admin") ) {
 %>
-        <jsp:include page="fileUploadForm.jsp"/>
+        <!--jsp:include page="fileUploadForm.jsp"/-->
 <%
     }
 %>        

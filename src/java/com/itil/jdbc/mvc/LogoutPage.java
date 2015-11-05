@@ -14,7 +14,7 @@ public class LogoutPage extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             if(request.getSession() != null) {
                 request.getSession().invalidate();
-                request.getServletContext().getRequestDispatcher(("/login.jsp")).forward(request, response);
+                request.getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
                 return;
             }
         }

@@ -1,10 +1,3 @@
-<%
-    if( request.getSession().getAttribute("connected") != null ) {
-%>
-        <jsp:forward page="index.jsp"/>
-<%
-    }
-%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,6 +6,13 @@
         <title>JSP Page</title>
     </head>
     <body>
+<%
+    if( request.getSession().getAttribute("connected") != null ) {
+%>
+        <jsp:forward page="index.jsp"/>
+<%
+    }
+%>        
         <h1>Authentification</h1>
 <%
         if( request.getAttribute("error-message") != null ) {
@@ -23,7 +23,7 @@
             <table border="1px solid black">
                 <tr>
                     <td>Username :</td>
-                    <td><input type="text" name="username" value="${ requestScope['username'] }"/></td>
+                    <td><input type="text" name="username" /></td>
                 </tr>
                 <tr>
                     <td>Password :</td>
