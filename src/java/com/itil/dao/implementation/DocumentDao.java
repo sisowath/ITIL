@@ -194,7 +194,10 @@ public class DocumentDao extends Dao<Document> {
             } else if("pdg".equals( role ) ) {
                 stm = cnx.prepareStatement("SELECT * FROM document WHERE typeDeDocument = ?");
                 stm.setString(1,"rapport annuel");
-            }                
+            } else if("comptable".equals( role ) ) {
+                stm = cnx.prepareStatement("SELECT * FROM document WHERE typeDeDocument = ?");
+                stm.setString(1,"rapport financier");
+            }               
             ResultSet r = stm.executeQuery();
             while (r.next()) {
                 Document c = new Document(r.getInt("id"), r.getString("titre"), r.getString("auteur"), r.getString("dateDeCreation"), r.getString("typeDeDocument"), r.getString("path"), r.getString("format"), r.getString("keyword"));

@@ -2,10 +2,10 @@
 -- version 4.2.7.1
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Nov 06, 2015 at 12:07 PM
--- Server version: 5.6.20-log
--- PHP Version: 5.4.31
+-- Client :  localhost
+-- Généré le :  Ven 06 Novembre 2015 à 16:43
+-- Version du serveur :  5.6.20-log
+-- Version de PHP :  5.4.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `itil`
+-- Base de données :  `itil`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `document`
+-- Structure de la table `document`
 --
 
 CREATE TABLE IF NOT EXISTS `document` (
@@ -35,10 +35,10 @@ CREATE TABLE IF NOT EXISTS `document` (
   `path` varchar(20) COLLATE latin1_bin NOT NULL DEFAULT './document/',
   `format` varchar(10) COLLATE latin1_bin NOT NULL DEFAULT '.pdf',
   `keyword` varchar(50) COLLATE latin1_bin NOT NULL
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_bin AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_bin AUTO_INCREMENT=12 ;
 
 --
--- Dumping data for table `document`
+-- Contenu de la table `document`
 --
 
 INSERT INTO `document` (`id`, `titre`, `auteur`, `dateDeCreation`, `typeDeDocument`, `path`, `format`, `keyword`) VALUES
@@ -47,12 +47,17 @@ INSERT INTO `document` (`id`, `titre`, `auteur`, `dateDeCreation`, `typeDeDocume
 (3, 'Markdown', 'CollegeDeRosemont', '2015-11-05', 'procedure', './document/', '.md', 'markdown, programming'),
 (4, 'Configuration, Installation et Administration de mysql sous Linux', 'Anonyme', '2013-08-21', 'fichier de configuration', './document/', '.pdf', 'mysql'),
 (5, 'CentOS 6 Linux Server Cookbook', 'Jonathan Hobson', '2013-01-01', 'ouvrage de référence', './document/', '.pdf', 'centos 6, linux, serveur'),
-(6, 'vmware-tools-installation-configuration', 'VmWare', '2012-09-03', 'fichier de configuration', './document/', '.pdf', 'vmware tools, machine virtuelle, virtualisation');
+(6, 'vmware-tools-installation-configuration', 'VmWare', '2012-09-03', 'fichier de configuration', './document/', '.pdf', 'vmware tools, machine virtuelle, virtualisation'),
+(7, 'Annual_Report_2014_SLF_en', 'SunLife', '2014-12-25', 'rapport annuel', './document/', '.pdf', 'sunlife'),
+(8, 'hpq-annual-report-2014', 'HP', '2014-12-25', 'rapport annuel', './document/', '.pdf', 'hp'),
+(9, 'nokia_uk_ar14', 'Nokia', '2014-12-25', 'rapport annuel', './document/', '.pdf', 'nokia'),
+(10, 'stm_rapport_financer_2013', 'STM', '2013-07-15', 'rapport financier', './document/', '.pdf', 'stm'),
+(11, 'ville_montreal_2014_rapport_financier_annuel_fr', 'ville de Montréal', '2014-03-14', 'rapport financier', './document/', '.pdf', 'ville de montréal');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Structure de la table `user`
 --
 
 CREATE TABLE IF NOT EXISTS `user` (
@@ -60,10 +65,10 @@ CREATE TABLE IF NOT EXISTS `user` (
   `username` varchar(20) COLLATE latin1_bin NOT NULL,
   `password` varchar(20) COLLATE latin1_bin NOT NULL,
   `role` varchar(20) COLLATE latin1_bin NOT NULL
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_bin AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_bin AUTO_INCREMENT=8 ;
 
 --
--- Dumping data for table `user`
+-- Contenu de la table `user`
 --
 
 INSERT INTO `user` (`id`, `username`, `password`, `role`) VALUES
@@ -71,39 +76,40 @@ INSERT INTO `user` (`id`, `username`, `password`, `role`) VALUES
 (2, 'kismony', 'ladouceur', 'admin'),
 (3, 'nicolas', 'blier', 'admin'),
 (4, 'jerome', 'beaulieu', 'admin'),
-(5, 'daniel', 'gailloux', 'user'),
-(6, 'usager', 'crosemont', 'user');
+(5, 'daniel', 'gailloux', 'pdg'),
+(6, 'usager', 'crosemont', 'user'),
+(7, 'comptable', 'comptable', 'comptable');
 
 --
--- Indexes for dumped tables
+-- Index pour les tables exportées
 --
 
 --
--- Indexes for table `document`
+-- Index pour la table `document`
 --
 ALTER TABLE `document`
  ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `user`
+-- Index pour la table `user`
 --
 ALTER TABLE `user`
  ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT pour les tables exportées
 --
 
 --
--- AUTO_INCREMENT for table `document`
+-- AUTO_INCREMENT pour la table `document`
 --
 ALTER TABLE `document`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
