@@ -191,6 +191,9 @@ public class DocumentDao extends Dao<Document> {
             } else if("user".equals( role ) ) {
                 stm = cnx.prepareStatement("SELECT * FROM document WHERE format = ?");
                 stm.setString(1,".pdf");
+            } else if("pdg".equals( role ) ) {
+                stm = cnx.prepareStatement("SELECT * FROM document WHERE typeDeDocument = ?");
+                stm.setString(1,"rapport annuel");
             }                
             ResultSet r = stm.executeQuery();
             while (r.next()) {
