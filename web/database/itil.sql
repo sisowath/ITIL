@@ -2,10 +2,10 @@
 -- version 4.2.7.1
 -- http://www.phpmyadmin.net
 --
--- Client :  localhost
--- Généré le :  Jeu 05 Novembre 2015 à 22:34
--- Version du serveur :  5.6.20-log
--- Version de PHP :  5.4.31
+-- Host: localhost
+-- Generation Time: Nov 06, 2015 at 12:07 PM
+-- Server version: 5.6.20-log
+-- PHP Version: 5.4.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de données :  `itil`
+-- Database: `itil`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `document`
+-- Table structure for table `document`
 --
 
 CREATE TABLE IF NOT EXISTS `document` (
@@ -31,24 +31,28 @@ CREATE TABLE IF NOT EXISTS `document` (
   `titre` varchar(100) COLLATE latin1_bin NOT NULL,
   `auteur` varchar(100) COLLATE latin1_bin NOT NULL DEFAULT 'CollegeDeRosemont',
   `dateDeCreation` date NOT NULL,
-  `path` varchar(20) COLLATE latin1_bin NOT NULL,
-  `format` varchar(10) COLLATE latin1_bin NOT NULL,
+  `typeDeDocument` varchar(100) COLLATE latin1_bin NOT NULL DEFAULT 'procedure',
+  `path` varchar(20) COLLATE latin1_bin NOT NULL DEFAULT './document/',
+  `format` varchar(10) COLLATE latin1_bin NOT NULL DEFAULT '.pdf',
   `keyword` varchar(50) COLLATE latin1_bin NOT NULL
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_bin AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_bin AUTO_INCREMENT=7 ;
 
 --
--- Contenu de la table `document`
+-- Dumping data for table `document`
 --
 
-INSERT INTO `document` (`id`, `titre`, `auteur`, `dateDeCreation`, `path`, `format`, `keyword`) VALUES
-(1, 'C Sharp Programming', 'CollegeDeRosemont', '2013-04-30', './document/', '.pdf', 'c#, programming'),
-(2, 'Java EE 7 Development', 'CollegeDeRosemont', '2015-01-01', './document/', '.pdf', 'java, programming'),
-(3, 'Markdown', 'CollegeDeRosemont', '2015-11-05', './document/', '.md', 'markdown, programming');
+INSERT INTO `document` (`id`, `titre`, `auteur`, `dateDeCreation`, `typeDeDocument`, `path`, `format`, `keyword`) VALUES
+(1, 'C Sharp Programming', 'CollegeDeRosemont', '2013-04-30', 'ouvrage de référence', './document/', '.pdf', 'c#, programming'),
+(2, 'Java EE 7 Development', 'CollegeDeRosemont', '2015-01-01', 'ouvrage de référence', './document/', '.pdf', 'java, programming'),
+(3, 'Markdown', 'CollegeDeRosemont', '2015-11-05', 'procedure', './document/', '.md', 'markdown, programming'),
+(4, 'Configuration, Installation et Administration de mysql sous Linux', 'Anonyme', '2013-08-21', 'fichier de configuration', './document/', '.pdf', 'mysql'),
+(5, 'CentOS 6 Linux Server Cookbook', 'Jonathan Hobson', '2013-01-01', 'ouvrage de référence', './document/', '.pdf', 'centos 6, linux, serveur'),
+(6, 'vmware-tools-installation-configuration', 'VmWare', '2012-09-03', 'fichier de configuration', './document/', '.pdf', 'vmware tools, machine virtuelle, virtualisation');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE IF NOT EXISTS `user` (
@@ -59,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_bin AUTO_INCREMENT=7 ;
 
 --
--- Contenu de la table `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id`, `username`, `password`, `role`) VALUES
@@ -71,32 +75,32 @@ INSERT INTO `user` (`id`, `username`, `password`, `role`) VALUES
 (6, 'usager', 'crosemont', 'user');
 
 --
--- Index pour les tables exportées
+-- Indexes for dumped tables
 --
 
 --
--- Index pour la table `document`
+-- Indexes for table `document`
 --
 ALTER TABLE `document`
  ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
  ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT pour les tables exportées
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT pour la table `document`
+-- AUTO_INCREMENT for table `document`
 --
 ALTER TABLE `document`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
--- AUTO_INCREMENT pour la table `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;

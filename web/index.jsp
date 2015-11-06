@@ -20,14 +20,19 @@
     }
 %>      
         <h1>Bonjour <%= request.getSession().getAttribute("user.username") %>, Bienvenue à la page d'accueil</h1>
-        <a href="./controller?action=logout">Se déconnecter</a>     
+        <nav>
+            <a href="./advancedSearch.jsp">Effectuer une recherche avancée</a> |
+            <a href="./postEvaluation.jsp">Publier une évaluation</a> |        
 <%        
     if( request.getSession().getAttribute("user.role").equals("admin") ) {
 %>
-        <jsp:include page="fileUploadForm.jsp"/>
+            <a href="./fileUploadForm.jsp"/>Téléverser un document</a> |
 <%
     }
 %>          
+            <a href="./controller?action=logout">Se déconnecter</a>     
+        </nav>
+        <hr />
         <jsp:include page="searchBar.jsp"/><hr />
 <%
     if( request.getAttribute("error-message") != null ) {
@@ -47,6 +52,8 @@
     }
 %>        
         <jsp:include page="documentOutput.jsp"/>
-        <jsp:include page="footer.jsp"/>
+        <hr />
+        <jsp:include page="departementOutput.jsp"/>
+        <!-- jsp:include page="footer.jsp"/ -->
     </body>
 </html>

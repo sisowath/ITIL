@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="./js/styleForDocumentOutput.css">
 <%@page import="com.itil.entites.Document"%>
 <%@page import="com.itil.dao.implementation.DocumentDao"%>
 <%@page import="java.util.List"%>
@@ -14,20 +15,22 @@
             uneListeDesDocuments = (List<Document>) request.getAttribute("wantedList");
         }
         out.println("<table border=\"1px solid black\"");
-        out.println("<tr><th colspan=\"7\">La liste des documents disponibles</th</td>");
+        out.println("<tr><th colspan=\"8\">La liste des documents disponibles</th</td>");
         out.println("<tr>");
         out.println("<th>Titre</th>");
         out.println("<th>Auteur</th>");
         out.println("<th>Date de création</th>");
+        out.println("<th>Type de document</th>");
         out.println("<th>Format / Extension</th>");
         out.println("<th>Path</th>");
         out.println("<th>Keyword(s)</th>");
         out.println("</tr>");
         for(int i=0; i < uneListeDesDocuments.size(); i++) {
             out.println("<tr>");
-            out.println("<td>" + uneListeDesDocuments.get(i).getTitre() + "</td>");
+            out.println("<td id=\"documentOutputTitleColumn\">" + uneListeDesDocuments.get(i).getTitre() + "</td>");
             out.println("<td>" + uneListeDesDocuments.get(i).getAuteur() + "</td>");
             out.println("<td>" + uneListeDesDocuments.get(i).getDateDeCreation() + "</td>");
+            out.println("<td>" + uneListeDesDocuments.get(i).getTypeDeDocument() + "</td>");
             out.println("<td>" + uneListeDesDocuments.get(i).getFormat() + "</td>");
             out.println("<td>" + uneListeDesDocuments.get(i).getPath() + "</td>");
             out.println("<td>" + uneListeDesDocuments.get(i).getKeyword() + "</td>");

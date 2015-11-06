@@ -6,22 +6,24 @@ public class Document {
     private String titre;
     private String auteur;
     private String dateDeCreation;
+    private String typeDeDocument;
     private String path;
     private String format;
     private String keyword;    
         // methode(s)
     // constructeur(s)
-    public Document(int id, String titre, String auteur, String dateDeCreation, String path, String format, String keyword) {
+    public Document(int id, String titre, String auteur, String dateDeCreation, String typeDeDocument, String path, String format, String keyword) {
         this.id = id;
         this.titre = titre;
         this.auteur = auteur;
         this.dateDeCreation = dateDeCreation;
+        this.typeDeDocument = typeDeDocument;
         this.path = path;
         this.format = format;
         this.keyword = keyword;
     }
     public Document() {
-        this(1, "no titre", "no auteur", "no dateDeCreation", "no path", "no format", "no keyword");
+        this(1, "no titre", "no auteur", "no dateDeCreation", "no typeDeDocument", "no path", "no format", "no keyword");
     }
     // accesseur(s)
     public int getId() {
@@ -35,6 +37,9 @@ public class Document {
     }
     public String getDateDeCreation() {
         return this.dateDeCreation;
+    }
+    public String getTypeDeDocument() {
+        return this.typeDeDocument;
     }
     public String getPath() {
         return path;
@@ -54,9 +59,12 @@ public class Document {
     }
     public void setAuteur(String auteur) {
         this.auteur = auteur;
-    }
+    }    
     public void setDateDeCreation(String dateDeCreation) {
         this.dateDeCreation = dateDeCreation;
+    }
+    public void setTypeDeDocument(String typeDeDocument) {
+        this.typeDeDocument = typeDeDocument;
     }
     public void setPath(String path) {
         this.path = path;

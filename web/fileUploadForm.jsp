@@ -6,11 +6,26 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form method="POST" action="./controller?action=televersement" enctype="multipart/form-data" >
+        <form method="POST" action="./controller" enctype="multipart/form-data" >
             <table border="1px solid black">
                 <tr>
                     <td>File : </td>
-                    <td><input type="file" name="file" id="file" /></td>
+                    <td><input type="file" name="file" id="file" /></td>                    
+                </tr>
+                <tr>
+                    <td>Auteur : </td>
+                    <td><input type="text" name="auteur"/></td>
+                </tr>
+                <tr>
+                    <td>Type de document : </td>
+                    <td><input type="text" name="typeDeDocument"/></td>
+                </tr>
+                <tr>
+                    <td>Date de création : </td>
+                    <td><input type="date"</td>
+                </tr>
+                <tr>
+                    <td><input type="hidden" name="action" value="televersement"/></td>
                     <td><input type="submit" value="Upload" name="upload" id="upload" /></td>
                 </tr>
             </table>

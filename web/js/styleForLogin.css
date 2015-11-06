@@ -11,6 +11,8 @@ body {
     //background-color : yellow;
     margin: 0;
     padding: 0;
+    background-image: url('../images/knowledge_management.jpg');
+    background-size: cover;
 }
 h1 {
     color : blue;
@@ -20,3 +22,6 @@ form {
     width: 300px;
     margin: 0 auto;
 }// source de : http://stackoverflow.com/questions/19089018/how-to-align-form-at-the-center-of-the-page-in-html-css 
+td {
+    background-color: activeborder;
+}

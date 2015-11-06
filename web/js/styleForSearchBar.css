@@ -1,0 +1,19 @@
+#searchBar {
+    background-image: url('../images/search_background_2.jpg');
+    background-size: cover;// source de : http://stackoverflow.com/questions/1150163/stretch-and-scale-a-css-image-in-the-background-with-css-only
+    padding-top: 25px;
+    padding-bottom: 25px;
+    border: 0;
+}
+#searchBarTable {
+    //padding-top: 25px;
+}
+#searchBarInputText {
+    width: 200px;
+}
+#searchBarInputSubmit {
+    width: 200px;
+}
+.searchBarTd {
+    background-color: azure;
+}

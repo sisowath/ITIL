@@ -18,9 +18,9 @@ public class DocumentDao extends Dao<Document> {
 
     @Override
     public boolean create(Document x) {
-        String req =    "INSERT INTO document (`titre`, `auteur`, `dateDeCreation`, `path`, `format`, `keyword`) " + 
+        String req =    "INSERT INTO document (`titre`, `auteur`, `dateDeCreation`, `typeDeDocument`, `path`, `format`, `keyword`) " + 
                         "VALUES ('" + x.getTitre() + "','" + x.getAuteur() + "', '" + x.getDateDeCreation() + "','" +  
-                        x.getPath() + "', '" + x.getFormat() + "','" + x.getKeyword() + "')";
+                        x.getTypeDeDocument() + "', '" + x.getPath() + "', '" + x.getFormat() + "','" + x.getKeyword() + "')";
         Statement stm = null;
         try {
             stm = cnx.createStatement();
@@ -80,6 +80,7 @@ public class DocumentDao extends Dao<Document> {
                 c.setTitre( r.getString("titre"));
                 c.setAuteur( r.getString("auteur"));
                 c.setDateDeCreation( r.getString("dateDeCreation"));
+                c.setTypeDeDocument( r.getString("typeDeDocument"));
                 c.setPath( r.getString("path"));
                 c.setFormat( r.getString("format"));
                 c.setKeyword( r.getString("keyword"));
@@ -112,6 +113,7 @@ public class DocumentDao extends Dao<Document> {
                 c.setTitre( r.getString("titre"));
                 c.setAuteur( r.getString("auteur"));
                 c.setDateDeCreation( r.getString("dateDeCreation"));
+                c.setTypeDeDocument( r.getString("typeDeDocument"));
                 c.setPath( r.getString("path"));
                 c.setFormat( r.getString("format"));
                 c.setKeyword( r.getString("keyword"));
@@ -139,6 +141,7 @@ public class DocumentDao extends Dao<Document> {
         try {
             String req =    "UPDATE document SET titre = '" + x.getTitre() + 
                             "', auteur = '" + x.getAuteur() + "', dateDeCreation = '" + x.getDateDeCreation() +
+                            "', typeDeDocument = '" + x.getTypeDeDocument() +
                             "', path = '" + x.getPath() + "', format = '" + x.getFormat() + 
                             "', keyword = '" + x.getKeyword() + "'" +
                             " WHERE id = " + x.getId() + "";
@@ -169,7 +172,7 @@ public class DocumentDao extends Dao<Document> {
             Statement stm = cnx.createStatement();
             ResultSet r = stm.executeQuery("SELECT * FROM document");
             while (r.next()) {
-                Document c = new Document(r.getInt("id"), r.getString("titre"), r.getString("auteur"), r.getString("dateDeCreation"), r.getString("path"), r.getString("format"), r.getString("keyword"));
+                Document c = new Document(r.getInt("id"), r.getString("titre"), r.getString("auteur"), r.getString("dateDeCreation"), r.getString("typeDeDocument"), r.getString("path"), r.getString("format"), r.getString("keyword"));
                 liste.add(c);
             }
             r.close();
@@ -191,7 +194,7 @@ public class DocumentDao extends Dao<Document> {
             }                
             ResultSet r = stm.executeQuery();
             while (r.next()) {
-                Document c = new Document(r.getInt("id"), r.getString("titre"), r.getString("auteur"), r.getString("dateDeCreation"), r.getString("path"), r.getString("format"), r.getString("keyword"));
+                Document c = new Document(r.getInt("id"), r.getString("titre"), r.getString("auteur"), r.getString("dateDeCreation"), r.getString("typeDeDocument"), r.getString("path"), r.getString("format"), r.getString("keyword"));
                 liste.add(c);
             }            
             r.close();
@@ -210,7 +213,7 @@ public class DocumentDao extends Dao<Document> {
             stm.setString(1,"%" + keyword.toLowerCase() + "%");         
             ResultSet r = stm.executeQuery();
             while (r.next()) {
-                Document c = new Document(r.getInt("id"), r.getString("titre"), r.getString("auteur"), r.getString("dateDeCreation"), r.getString("path"), r.getString("format"), r.getString("keyword"));
+                Document c = new Document(r.getInt("id"), r.getString("titre"), r.getString("auteur"), r.getString("dateDeCreation"), r.getString("typeDeDocument"), r.getString("path"), r.getString("format"), r.getString("keyword"));
                 liste.add(c);
             }            
             r.close();
